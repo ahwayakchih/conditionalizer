@@ -7,6 +7,8 @@ Author: Marcin Konicki (http://ahwayakchih.neoni.net)
 Build Date: 12 March 2009
 Requirements: Symphony version 2.0.2 or later.
 
+
+
 [SYNOPSIS]
 
 Field: Filter allows to use expressions to conditionally filter 
@@ -40,6 +42,7 @@ when expression evaluates to false, database is not queried at all
 and data source outputs empty set.
 
 
+
 [INSTALLATION]
 
 1. Upload the 'filterfield' folder in this archive to your Symphony 
@@ -50,11 +53,13 @@ and data source outputs empty set.
    "Apply" button.
 
 
+
 [USAGE]
 
 1. Add Filter field to section which you want to filter conditionally.
 
 2. Filter data source of that section by Filter field.
+
 
 
 [SYNTAX]
@@ -71,7 +76,8 @@ VALUES is comma separated list of values. Each of them can be either
    literal value, {$param} or sub expression. Every VALUES has to be 
    inside parenthesis. It can be empty, but parenthesis is required.
 
-OPERAND: "is", "is not", "is in" or "is not in"
+OPERAND can be "is", "is not", "is in" or "is not in".
+
 
 
 [EXAMPLES]
