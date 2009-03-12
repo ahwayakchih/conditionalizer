@@ -48,11 +48,13 @@ and datasource outputs empty set.
    choose Enable from the "With selected..." menu, then click 
    "Apply" button.
 
+
 [USAGE]
 
 1. Add Filter field to section which you want to filter conditionally.
 
 2. Filter datasource of that section by Filter field.
+
 
 [SYNTAX]
 
@@ -69,6 +71,7 @@ VALUES is comma separated list of values. Each of them can be either
    inside parenthesis. It can be empty, but parenthesis is required.
 
 OPERAND: "is", "is not", "is in" or "is not in"
+
 
 [EXAMPLES]
 
