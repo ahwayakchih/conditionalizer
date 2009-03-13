@@ -2,7 +2,7 @@
 	Class extension_filterField extends Extension{
 	
 		public function about(){
-			return array('name' => 'Field: Filter',
+			return array('name' => __('Field: Filter'),
 						 'version' => '1.0',
 						 'release-date' => '2009-03-12',
 						 'author' => array('name' => 'Marcin Konicki',
