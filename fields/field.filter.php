@@ -105,7 +105,7 @@
 			$optionlist->setAttribute('class', 'tags');
 
 			foreach ($params as $param => $value) {
-				$optionlist->appendChild(new XMLElement('li', $param, array('class' => '{$'.$param.'}', 'title' => ($value ? "Value of {$value}" : 'Value found in URL path'))));
+				$optionlist->appendChild(new XMLElement('li', $param, array('class' => '{$'.$param.'}', 'title' => ($value ? __("Value of %s", array($value)) : __('Value found in URL path')))));
 			}
 
 			$wrapper->appendChild($optionlist);
