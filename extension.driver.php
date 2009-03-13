@@ -8,7 +8,7 @@
 						 'author' => array('name' => 'Marcin Konicki',
 										   'website' => 'http://ahwayakchih.neoni.net',
 										   'email' => 'ahwayakchih@neoni.net'),
-						 'description' => 'Allows to filter datasource and publishing with expressions and parameters.'
+						 'description' => __('Allows to filter datasource and publishing with expressions and parameters.')
 			);
 		}
 
