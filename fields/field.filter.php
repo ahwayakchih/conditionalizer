@@ -163,7 +163,7 @@
 						}
 						$expression = str_replace($m[0], $v);
 					}
-					else $expression = str_replace($m[0], '');
+					else $expression = str_replace($m[0], '', $expression);
 				}
 			}
 
