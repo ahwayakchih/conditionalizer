@@ -161,7 +161,7 @@
 						if (is_array($v)) {
 							$v = implode(', ', $v);
 						}
-						$expression = str_replace($m[0], $v);
+						$expression = str_replace($m[0], $v, $expression);
 					}
 					else $expression = str_replace($m[0], '', $expression);
 				}
