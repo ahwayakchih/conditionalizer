@@ -149,11 +149,10 @@
 		// Check if publish data is valid
 		public function checkPostFieldData($data, &$message, $entry_id=NULL){
 			if (!($expression = trim($this->get('filter_publish')))) return self::__OK__;
-// TODO: Get entry fields data (backtrace? POST?) and replace {entry/field} with field value.
-//		We can't Use EntryPreCreate, EntryPreEdit and EventPreSaveFilter delegates
-//		because Entry* are called AFTER check (checkPostFieldData) and set (processRawFieldData).
-//		Only EventPreSaveFilter is called before them, but it's used only when publishing from frontend.
-			$fields = array();
+			// TODO: Find a way to allow for {entry/field} someday.
+			// For now we use only POSTed fields data.
+			$fields = $_POST['fields'];
+			$fields['system:id'] = $entry_id;
 			if (preg_match_all('@{([^}]+)}@i', $expression, $matches, PREG_SET_ORDER)) {
 				foreach ($matches as $m) {
 					if (isset($fields[$m[1]])) {
