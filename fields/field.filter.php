@@ -133,10 +133,12 @@
 			parent::displaySettingsPanel($wrapper, $errors);
 
 			// Disable/Enable publish filtering
-			$label = Widget::Label(__('Prevent publishing if expression below evaluates to false'));
+			$label = Widget::Label(__('Allow saving entry only if expression below evaluates to true'));
+			$label->appendChild(new XMLElement('i', __('Optional')));
 			$input = Widget::Input('fields['.$this->get('sortorder').'][filter_publish]', $this->get('filter_publish'));
 			$label->appendChild($input);
 			$wrapper->appendChild($label);
+			$wrapper->appendChild(new XMLElement('p', __('Use <code>{$param}</code> syntax to put POSTed values into expression before it will be evaluated. For example, to use value from element "<code>fields[published]</code>" enter "<code>{$published}</code>" as part of expression.'), array('class' => 'help')));
 
 			// Disable/Enable datasource filtering
 			$label = Widget::Label();
@@ -153,7 +155,7 @@
 			// For now we use only POSTed fields data.
 			$fields = $_POST['fields'];
 			$fields['system:id'] = $entry_id;
-			if (preg_match_all('@{([^}]+)}@i', $expression, $matches, PREG_SET_ORDER)) {
+			if (preg_match_all('@{\$([^}]+)}@i', $expression, $matches, PREG_SET_ORDER)) {
 				foreach ($matches as $m) {
 					if (isset($fields[$m[1]])) {
 						$v = $fields[$m[1]];

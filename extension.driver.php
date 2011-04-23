@@ -3,8 +3,8 @@
 	
 		public function about(){
 			return array('name' => __('Field: Filter'),
-						 'version' => '1.0',
-						 'release-date' => '2009-03-12',
+						 'version' => '1.1',
+						 'release-date' => '2011-04-23',
 						 'author' => array('name' => 'Marcin Konicki',
 										   'website' => 'http://ahwayakchih.neoni.net',
 										   'email' => 'ahwayakchih@neoni.net'),
@@ -13,7 +13,7 @@
 		}
 
 		public function uninstall(){
-			return $this->_Parent->Database->query("DROP TABLE `tbl_fields_filter`");
+			return Symphony::Database()->query("DROP TABLE `tbl_fields_filter`");
 		}
 		
 		public function update($previousVersion){
@@ -21,7 +21,7 @@
 		}
 
 		public function install(){
-			return $this->_Parent->Database->query("CREATE TABLE `tbl_fields_filter` (
+			return Symphony::Database()->query("CREATE TABLE `tbl_fields_filter` (
 				`id` int(11) unsigned NOT NULL auto_increment,
 				`field_id` int(11) unsigned NOT NULL,
 				`filter_publish` TEXT default '',
