@@ -37,7 +37,7 @@ Filter field can also be used to minimize number of SQL queries, because when ex
 
 ## Changelog
 
-- **1.1** Allow using expression to prevent entry from being saved.
+- **1.1** Allow using expression to prevent entry from being saved. Publish filtering expressions can now use {XPath}. Field now stores "yes" or "no" (when publish filter returns false) value.
 - **1.0** Initial release.
 
 
@@ -52,8 +52,9 @@ To filter data source:
 To allow or block saving of an entry:
 
 1. Add Filter field to section which you want to filter by expression.
-2. Enter expression which has to evaluate to true before entry can be saved. You can use `{$param}` syntax to make expression use values POSTed from HTML form, e.g., value of field named `fields[published]` can be put into expression using `{$published}`.
-3. Edit entry and see if it can or cannot be saved.
+2. Enter expression which will be evaluated when entry is saved. If it returns false, field value will be set to "no" in database. Otherwise it will be set to "yes". You can use `{XPath}` syntax to make expression use values found in XML containing `post`, `author`, `old-entry` (if entry is being edited) and `entry` elements, e.g., value of field named `fields[published]` can be put into expression using `{post/published}`.
+3. Check "Allow saving entry only if expression above evaluates to true" if field should prevent entry from being saved after expression evaluates to false.
+4. Edit entry and see if it can or cannot be saved to database :).
 
 
 ## Syntax
@@ -72,9 +73,12 @@ OPERAND can be "is", "is not", "is in" or "is not in".
 
 ## Examples of using expression to allow saving an entry
 
-If section has checkbox field "published" and entry should not be unpublished if it was saved at least once before (special variable `system:id` will be empty):
+If section has checkbox field "published" and entry should not be unpublished if it was saved at least once before:
 
-	(if any of ((if value of ({$system:id}) is ()), (if value of ({$published}) is (yes))) is (yes))
+	(if any of ((if value of ({concat('id', old-entry/@id)}) is (id)), (if value of (yes) is ({post/published}))) is (yes))
+
+It concats string to old-entry/@id, just in case old-entry is not there (and returns empty string). So, if old-entry is there, value will become "id123" (123 will be real entry ID). If old-entry is not there, value will become "id".
+Expression will evaluate to true if it is new entry (old-entry is not there, so "id" is equal to "id") or if value of fields[published] is "yes".
 
 
 ## Examples of Data Source filtering
