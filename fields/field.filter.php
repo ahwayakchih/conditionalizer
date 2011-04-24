@@ -63,16 +63,6 @@
 			return false;
 		}
 
-		// Return list of values that can be applied to entry on section content page
-		public function getToggleStates() {
-			return array();
-		}
-
-		// Apply new field value to data
-		public function toggleFieldData($data, $newState) {
-			return $data;
-		}
-
 		// Generate XML data containing field values
 		public function appendFormattedElement(&$wrapper, $data, $encode = false) {
 			$value = ($data['value'] == 'yes' ? 'Yes' : 'No');
