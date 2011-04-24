@@ -33,29 +33,9 @@
 			return false;
 		}
 
-		// Specify if entries can be grouped by field when listed in XML
-		public function allowDatasourceOutputGrouping() {
-			return false;
-		}
-
-		// Specify if field requires grouping in SQL select (to avoid duplicate entry rows)
-		public function requiresSQLGrouping() {
-			return true;
-		}
-
-		// Specify if field can output it's value as XSLT parameter
-		public function allowDatasourceParamOutput() {
-			return false;
-		}
-
 		// Specify if entries can be filtered by this field
 		public function canFilter() {
 			return ($this->get('filter_datasource') == 'yes');
-		}
-
-		// TODO: what is this for? When data is imported? Does it have something to do with ensembles?
-		public function canImport() {
-			return false;
 		}
 
 		// Specify if field can be prepopulated through GET?
@@ -65,12 +45,22 @@
 
 		// Specify if entries can be sorted by this field
 		public function isSortable() {
+			return true;
+		}
+
+		// Specify if entries can be grouped by field when listed in XML
+		public function allowDatasourceOutputGrouping() {
 			return false;
 		}
 
-		// Return value to be used as XSLT parameter
-		public function getParameterPoolValue($data) {
-			return '';
+		// Specify if field requires grouping in SQL select (to avoid duplicate entry rows)
+		public function requiresSQLGrouping() {
+			return false;
+		}
+
+		// Specify if field can output it's value as XSLT parameter
+		public function allowDatasourceParamOutput() {
+			return false;
 		}
 
 		// Return list of values that can be applied to entry on section content page
@@ -229,6 +219,8 @@
 
 		// Prepare SQL part responsible for sorting entries by this field
 		public function buildSortingSQL(&$joins, &$where, &$sort, $order = 'ASC') {
+			$joins .= "LEFT OUTER JOIN `tbl_entries_data_".$this->get('id')."` AS `ed` ON (`e`.`id` = `ed`.`entry_id`) ";
+			$sort = 'ORDER BY ' . (in_array(strtolower($order), array('random', 'rand')) ? 'RAND()' : "`ed`.`value` $order");
 		}
 
 		// Prepare SQL part responsible for filtering entries by this field
