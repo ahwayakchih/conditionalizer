@@ -146,7 +146,7 @@
 			$label->appendChild($input);
 			if(isset($errors['filter_publish'])) $wrapper->appendChild(Widget::wrapFormElementWithError($label, $errors['filter_publish']));
 			else $wrapper->appendChild($label);
-			$wrapper->appendChild(new XMLElement('p', __('Default value of this field will be set to <code>yes</code>. If expression above will evaluate to <code>false</code>, value of this field will be set to <code>no</code>. Use <code>{XPath}</code> syntax to put values into expression before it will be evaluated, e.g., to make use of value from HTML element called "<code>fields[published]</code>" enter "<code>{post/published}</code>".'), array('class' => 'help')));
+			$wrapper->appendChild(new XMLElement('p', __('Default value of this field will be set to <code>yes</code>. If expression above will evaluate to <code>false</code>, value of this field will be set to <code>no</code>. Use <code>{XPath}</code> syntax to put values into expression before it will be evaluated, e.g., to make use of a value of an HTML element called "<code>fields[published]</code>" enter "<code>{post/published}</code>".'), array('class' => 'help')));
 
 			// Disable/Enable publish error when evaluated expression returns false
 			$label = Widget::Label();
