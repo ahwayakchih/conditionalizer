@@ -4,11 +4,11 @@
 		public function about() {
 			return array('name' => __('Field: Filter'),
 						 'version' => '1.1',
-						 'release-date' => '2011-04-23',
+						 'release-date' => '2011-04-25',
 						 'author' => array('name' => 'Marcin Konicki',
 										   'website' => 'http://ahwayakchih.neoni.net',
 										   'email' => 'ahwayakchih@neoni.net'),
-						 'description' => __('Allows to filter datasource and publishing with expressions and parameters.')
+						 'description' => __('Allows to filter data sources and this field values with expressions and parameters.')
 			);
 		}
 
