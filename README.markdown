@@ -76,7 +76,7 @@ OPERAND can be "is", "is not", "is in" or "is not in".
 
 ## Examples of filtering field's value when publishing an entry
 
-If section has a checkbox field called "published" and entry should not become "unpublished" after it was saved at least once before:
+If section has a checkbox field called "published" and an entry should not become "unpublished" after it was saved at least once before:
 
 	(if any of ((if value of ({concat('id', old-entry/@id)}) is (id)), (if value of (yes) is ({post/published}))) is (yes))
 
@@ -84,6 +84,10 @@ It concats string to `old-entry/@id`, just in case old-entry is not there (and r
 Expression will evaluate to `true` if it is a new entry (old-entry is not there, so `id` is equal to `id`) or if POSTed value of `fields[published]` is `yes`.
 
 If, at the same time, filter field is configured to "Allow saving an entry only when expression entered above evaluates to true", entry will not be saved if expression evaluates to `false`.
+
+The same result can also be achieved with simpler expression:
+
+	(if any of ((if value of ({old-entry/@id}) is ()), (if value of (yes) is ({post/published}))) is (yes))
 
 
 ## Examples of filtering a data source
