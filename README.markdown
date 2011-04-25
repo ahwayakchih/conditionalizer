@@ -85,7 +85,7 @@ Expression will evaluate to `true` if it is a new entry (old-entry is not there,
 
 If, at the same time, filter field is configured to "Allow saving an entry only when expression entered above evaluates to true", entry will not be saved if expression evaluates to `false`.
 
-The same result can also be achieved with simpler expression:
+The same result can also be achieved with a bit simpler expression:
 
 	(if any of ((if value of ({old-entry/@id}) is ()), (if value of (yes) is ({post/published}))) is (yes))
 
