@@ -140,26 +140,26 @@
 			parent::displaySettingsPanel($wrapper, $errors);
 
 			// Disable/Enable publish filtering
-			$label = Widget::Label(__('Expression'));
+			$label = Widget::Label(__('Value filter expression'));
 			$label->appendChild(new XMLElement('i', __('Optional')));
 			$input = Widget::Input('fields['.$this->get('sortorder').'][filter_publish]', $this->get('filter_publish'));
 			$label->appendChild($input);
 			if(isset($errors['filter_publish'])) $wrapper->appendChild(Widget::wrapFormElementWithError($label, $errors['filter_publish']));
 			else $wrapper->appendChild($label);
-			$wrapper->appendChild(new XMLElement('p', __('Default value of field will be set to "yes". If above expression will evaluate to false, field value will be set to "no". Use <code>{XPath}</code> syntax to put values into expression before it will be evaluated, e.g., to use value from element "<code>fields[published]</code>" enter "<code>{post/published}</code>" as part of expression.'), array('class' => 'help')));
+			$wrapper->appendChild(new XMLElement('p', __('Default value of this field will be set to <code>yes</code>. If expression above will evaluate to <code>false</code>, value of this field will be set to <code>no</code>. Use <code>{XPath}</code> syntax to put values into expression before it will be evaluated, e.g., to make use of value from HTML element called "<code>fields[published]</code>" enter "<code>{post/published}</code>".'), array('class' => 'help')));
 
 			// Disable/Enable publish error when evaluated expression returns false
 			$label = Widget::Label();
 			$input = Widget::Input('fields['.$this->get('sortorder').'][filter_publish_errors]', 'yes', 'checkbox');
 			if ($this->get('filter_publish_errors') == 'yes') $input->setAttribute('checked', 'checked');
-			$label->setValue(__('%s Allow saving entry only if expression above evaluates to true', array($input->generate())));
+			$label->setValue(__('%s Allow saving an entry only if expression entered above evaluates to true', array($input->generate())));
 			$wrapper->appendChild($label);
 
 			// Disable/Enable datasource filtering
 			$label = Widget::Label();
 			$input = Widget::Input('fields['.$this->get('sortorder').'][filter_datasource]', 'yes', 'checkbox');
 			if ($this->get('filter_datasource') == 'yes') $input->setAttribute('checked', 'checked');
-			$label->setValue(__('%s Allow datasources to filter this section with expression', array($input->generate())));
+			$label->setValue(__('%s Allow Data Sources to filter this section with an expression', array($input->generate())));
 			$wrapper->appendChild($label);
 		}
 
@@ -368,7 +368,7 @@
 			if (!preg_match('/(?:^[^\(]*)(\(if\s+(value of|any of|all of)\s*(\((?:[^\(\)]+|(?3))*\))\s+((?:is|are)(?: not|)(?: in|))\s*(\((?:[^\(\)]+|(?5))*\))\s*\))/', $e, $r))
 				return array();
 			
-			array_shift($r); // Remove $r[0] which contains data which we do not want
+			array_shift($r); // Remove $r[0] that contains data which we do not want
 			return $r;
 		}
 
