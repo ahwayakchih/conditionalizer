@@ -46,7 +46,7 @@ Filter field can also be used to minimize number of SQL queries, because every t
 To filter data source:
 
 1. Add a Filter field to a section which you want to be filtered by data source with a filter expression.
-2. Check "Allow datasources to filter this section with an expression" field.
+2. Check "Allow data sources to filter this section with an expression" field.
 3. Select filter field as one of the filters on data source edit page.
 4. Enter an expression which, when evaluated to `false`, will block data source from querying database.
 5. You can also enter value by which data source should be filtered. Just like when filtering data source with checkbox field.

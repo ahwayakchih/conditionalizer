@@ -159,7 +159,7 @@
 			$label = Widget::Label();
 			$input = Widget::Input('fields['.$this->get('sortorder').'][filter_datasource]', 'yes', 'checkbox');
 			if ($this->get('filter_datasource') == 'yes') $input->setAttribute('checked', 'checked');
-			$label->setValue(__('%s Allow Data Sources to filter this section with an expression', array($input->generate())));
+			$label->setValue(__('%s Allow data sources to filter this section with an expression', array($input->generate())));
 			$wrapper->appendChild($label);
 		}
 
