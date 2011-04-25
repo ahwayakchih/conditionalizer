@@ -152,7 +152,7 @@
 			$label = Widget::Label();
 			$input = Widget::Input('fields['.$this->get('sortorder').'][filter_publish_errors]', 'yes', 'checkbox');
 			if ($this->get('filter_publish_errors') == 'yes') $input->setAttribute('checked', 'checked');
-			$label->setValue(__('%s Allow saving an entry only if expression entered above evaluates to true', array($input->generate())));
+			$label->setValue(__('%s Allow saving an entry only when expression entered above evaluates to true', array($input->generate())));
 			$wrapper->appendChild($label);
 
 			// Disable/Enable datasource filtering
