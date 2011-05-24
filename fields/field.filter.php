@@ -117,7 +117,7 @@
 			$optionlist->appendChild(new XMLElement('li', 'no', array('title' => 'Exact string value')));
 
 			foreach ($params as $param => $value) {
-				$optionlist->appendChild(new XMLElement('li', $param, array('class' => '{$'.$param.'}', 'title' => ($value ? __('Value of %s returned from another data source', array($value)) : __('Value found in URL path')))));
+				$optionlist->appendChild(new XMLElement('li', $param, array('class' => '{'.$param.'}', 'title' => ($value ? __('Value of %s returned from another data source', array($value)) : __('Value found in URL path')))));
 			}
 
 			$wrapper->appendChild($optionlist);
@@ -378,7 +378,7 @@
 			// (if value of ({$ds-value}) is not ())
 			// (if any of ({$ds-value}) is in (one,two,three))
 			// (if all of ({$ds-value}) are in (one,two,three))
-			// (if any of ((if value of ({$ds-value}) is (one)), ({$ds-is-true})) is (false))
+			// (if any of ((if value of ({$ds-value}) is (one)), {$ds-is-true}) is (no))
 
 			if (is_array($e)) $r = $e; // Recursive call for sub expression, $e is already parsed
 			else $r = $this->parseExpression($e);
