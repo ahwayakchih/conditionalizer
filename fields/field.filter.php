@@ -21,6 +21,7 @@
 
 			// Set defaults
 			$this->set('show_column', 'no');
+			$this->set('hide', 'yes');
 			$this->set('required', 'yes');
 		}
 
