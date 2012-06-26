@@ -2,7 +2,7 @@
 
 - Version: 1.2
 - Author: Marcin Konicki (http://ahwayakchih.neoni.net)
-- Build Date: 25 June 2012
+- Build Date: 27 June 2012
 - Requirements: Symphony version 2.3 or later.
 
 
@@ -36,7 +36,7 @@ Conditionalizer field can also be used to minimize number of SQL queries, becaus
 
 ## Changelog
 
-- **1.2** Update for Symphony 2.3. This drops compatibility with Symphony 2.2. Changed name from `filterfield` to `conditionalizer`.
+- **1.2** Update for Symphony 2.3. This drops compatibility with Symphony 2.2. Changed name from `filterfield` to `conditionalizer`. Fields are not required to set conditions for data-source. Conditions can be set for any type of data-source, e.g., Dynamic XML.
 - **1.1** Allow using an expression to prevent an entry from being saved. Value filtering expressions can now use {XPath}. Filter field will now store `yes` or `no` (when field expression evaluates to `false`) value in database.
 - **1.0** Initial release.
 
