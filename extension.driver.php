@@ -34,7 +34,7 @@
 		}
 
 		public function install() {
-			$result = Symphony::Database()->query("CREATE TABLE `tbl_fields_conditionalizer` (
+			$result = Symphony::Database()->query("CREATE TABLE IF NOT EXISTS `tbl_fields_conditionalizer` (
 				`id` int(11) unsigned NOT NULL auto_increment,
 				`field_id` int(11) unsigned NOT NULL,
 				`expression` TEXT default '',
