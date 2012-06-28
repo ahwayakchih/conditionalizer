@@ -17,6 +17,11 @@
 		</author>
 	</authors>
 	<releases>
+		<release version="1.2.1" date="2012-06-28" min="2.3">
+			- Fixed handling of whitespace inside values used in expression.
+			- Expression input fields are now textareas.
+			- Shows nice error box after conditions were not met for saving an entry.
+		</release>
 		<release version="1.2" date="2012-06-27" min="2.3">
 			- Update for Symphony 2.3. This drops compatibility with Symphony 2.2.
 			- Changed name from `filterfield` to `conditionalizer`.

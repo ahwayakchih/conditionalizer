@@ -47,13 +47,15 @@ class Conditionalizer {
 				}
 			}
 
+			$r[2] = trim($r[2]);
+			$r[4] = trim($r[4]);
 			switch ($r[3]) {
 				case 'is in':
 				case 'are in':
 					if ((!$r[2] || !$r[4]) && $r[2] != $r[4]) return false;
 
-					$r[2] = preg_split('/,\s*/', $r[2]);
-					$r[4] = preg_split('/,\s*/', $r[4]);
+					$r[2] = preg_split('/\s*,\s*/', $r[2]);
+					$r[4] = preg_split('/\s*,\s*/', $r[4]);
 					$found = array_intersect($r[2], $r[4]);
 					if ($r[1] == 'value of' || $r[1] == 'all of') {
 						return (!empty($found) && count($r[2]) >= count($found) && count($r[2]) <= count($r[4]));
@@ -67,8 +69,8 @@ class Conditionalizer {
 				case 'are not in':
 					if ((!$r[2] || !$r[4]) && $r[2] != $r[4]) return true;
 
-					$r[2] = preg_split('/,\s*/', $r[2]);
-					$r[4] = preg_split('/,\s*/', $r[4]);
+					$r[2] = preg_split('/\s*,\s*/', $r[2]);
+					$r[4] = preg_split('/\s*,\s*/', $r[4]);
 					$found = array_intersect($r[2], $r[4]);
 					if ($r[1] == 'value of' || $r[1] == 'all of') {
 						return (empty($found));
@@ -83,13 +85,13 @@ class Conditionalizer {
 						return ($r[2] != $r[4]);
 					}
 					else if ($r[1] == 'any of') {
-						foreach (preg_split('/,\s*/', $r[2]) as $v) {
+						foreach (preg_split('/\s*,\s*/', $r[2]) as $v) {
 							if ($v != $r[4]) return true;
 						}
 						return false;
 					}
 					else if ($r[1] == 'all of') {
-						foreach (preg_split('/,\s*/', $r[2]) as $v) {
+						foreach (preg_split('/\s*,\s*/', $r[2]) as $v) {
 							if ($v == $r[4]) return false;
 						}
 					}
@@ -100,13 +102,13 @@ class Conditionalizer {
 						return ($r[2] == $r[4]);
 					}
 					else if ($r[1] == 'any of') {
-						foreach (preg_split('/,\s*/', $r[2]) as $v) {
+						foreach (preg_split('/\s*,\s*/', $r[2]) as $v) {
 							if ($v == $r[4]) return true;
 						}
 						return false;
 					}
 					else if ($r[1] == 'all of') {
-						foreach (preg_split('/,\s*/', $r[2]) as $v) {
+						foreach (preg_split('/\s*,\s*/', $r[2]) as $v) {
 							if ($v != $r[4]) return false;
 						}
 					}

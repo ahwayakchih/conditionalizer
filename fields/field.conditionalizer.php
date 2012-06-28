@@ -71,11 +71,11 @@
 			// Disable/Enable publish filtering
 			$label = Widget::Label(__('Expression'));
 			$label->appendChild(new XMLElement('i', __('Optional')));
-			$input = Widget::Input('fields['.$this->get('sortorder').'][expression]', $this->get('expression'));
+			$input = Widget::Textarea('fields['.$this->get('sortorder').'][expression]', 6, 50, General::sanitize(stripslashes($this->get('expression'))), array('class' => 'code'));
 			$label->appendChild($input);
 			if (isset($errors['expression'])) $wrapper->appendChild(Widget::wrapFormElementWithError($label, $errors['expression']));
 			else $wrapper->appendChild($label);
-			$wrapper->appendChild(new XMLElement('p', __('Default value of this field will be set to <code>yes</code>. If expression above will evaluate to <code>false</code>, value of this field will be set to <code>no</code>. Use <code>{XPath}</code> syntax to put values into expression before it will be evaluated, e.g., to make use of a value posted from HTML element called "<code>fields[published]</code>" enter "<code>{post/published}</code>".'), array('class' => 'help')));
+			$wrapper->appendChild(new XMLElement('p', __('Default value of this field will be set to <code>yes</code>. If expression above will evaluate to <code>false</code>, value of this field will be set to <code>no</code>. Use <code>{XPath}</code> syntax to put values into expression before it will be evaluated, e.g., to make use of a value posted from HTML element called "<code>fields[published]</code>" enter "<code>{/data/post/published}</code>".'), array('class' => 'help')));
 
 			// Disable/Enable publish error when evaluated expression returns false
 			$label = Widget::Label();
@@ -115,6 +115,13 @@
 		Publish:
 	-------------------------------------------------------------------------*/
 
+		public function displayPublishPanel(XMLElement &$wrapper, $data = NULL, $flagWithError = NULL, $fieldnamePrefix = NULL, $fieldnamePostfix = NULL, $entry_id = NULL) {
+			if ($flagWithError == NULL) return;
+
+			$label = Widget::Label($this->get('label'));
+			$wrapper->appendChild(Widget::wrapFormElementWithError($label, $flagWithError));
+		}
+
 		public function checkPostFieldData($data, &$message, $entry_id = NULL) {
 			if (!($expression = trim($this->get('expression'))) || self::$recursion == true) return self::__OK__;
 
@@ -144,7 +151,7 @@
 			$result = self::__OK__;
 			$message = NULL;
 			if (!Conditionalizer::evaluate($expression)) {
-				$message = __("Contains invalid data.");
+				$message = __("Conditions not met.");
 				$result = self::__INVALID_FIELDS__;
 			}
 

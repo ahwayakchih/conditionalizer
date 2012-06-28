@@ -1,8 +1,8 @@
 # Conditionalizer
 
-- Version: 1.2
+- Version: 1.2.1
 - Author: Marcin Konicki (http://ahwayakchih.neoni.net)
-- Build Date: 27 June 2012
+- Build Date: 28 June 2012
 - Requirements: Symphony version 2.3 or later.
 
 
@@ -36,6 +36,7 @@ Conditionalizer field can also be used to minimize number of SQL queries, becaus
 
 ## Changelog
 
+- **1.2.1** Fixed handling of whitespace inside values used in expression. Expression input fields are now textareas. Shows nice error box after conditions were not met for saving an entry.
 - **1.2** Update for Symphony 2.3. This drops compatibility with Symphony 2.2. Changed name from `filterfield` to `conditionalizer`. Fields are not required to set conditions for data-source. Conditions can be set for any type of data-source, e.g., Dynamic XML.
 - **1.1** Allow using an expression to prevent an entry from being saved. Value filtering expressions can now use {XPath}. Filter field will now store `yes` or `no` (when field expression evaluates to `false`) value in database.
 - **1.0** Initial release.
@@ -55,7 +56,7 @@ To filter data source:
 To allow or disallow saving of an entry:
 
 1. Add a Filter field to a section of which entry values should be filtered by an expression.
-2. Enter a filter expression which will be evaluated every time an entry is being saved. If evaluation will return `false`, value of a field will be set to `no`. Otherwise it will be set to `yes`. You can use `{XPath}` syntax for an expression to make use of values found in XML that contains `post`, `author`, `old-entry` (only when entry is edited) and `entry` elements, e.g., to check value of a field called `fields[published]` enter `{post/published}`.
+2. Enter a filter expression which will be evaluated every time an entry is being saved. If evaluation will return `false`, value of a field will be set to `no`. Otherwise it will be set to `yes`. You can use `{XPath}` syntax for an expression to make use of values found in XML that contains `post`, `author`, `old-entry` (only when entry is edited) and `entry` elements, e.g., to check value of a field called `fields[published]` enter `{/data/post/published}`.
 3. Check "Allow saving an entry only when expression entered above evaluates to true" if a field should prevent an entry from being saved to database after value filter expression evaluates to `false`.
 4. Edit an entry and see if it can or cannot be saved to database :).
 
@@ -78,16 +79,16 @@ OPERAND can be "is", "is not", "is in" or "is not in".
 
 If section has a checkbox field called "published" and an entry should not become "unpublished" after it was saved at least once before:
 
-	(if any of ((if value of ({concat('id', old-entry/@id)}) is (id)), (if value of (yes) is ({post/published}))) is (yes))
+	(if any of ((if value of ({concat('id', /data/old-entry/@id)}) is (id)), (if value of (yes) is ({/data/post/published}))) is (yes))
 
-It concats string to `old-entry/@id`, just in case old-entry is not there (and returns empty string). So, if old-entry is there, value will become `id123` (number will be set to entry ID). If old-entry is not there, value will become `id`.
+It concats string to `/data/old-entry/@id`, just in case old-entry is not there (and returns empty string). So, if old-entry is there, value will become `id123` (number will be set to entry ID). If old-entry is not there, value will become `id`.
 Expression will evaluate to `true` if it is a new entry (old-entry is not there, so `id` is equal to `id`) or if POSTed value of `fields[published]` is `yes`.
 
 If, at the same time, filter field is configured to "Allow saving an entry only when expression entered above evaluates to true", entry will not be saved if expression evaluates to `false`.
 
 The same result can also be achieved with a bit simpler expression:
 
-	(if any of ((if value of ({old-entry/@id}) is ()), (if value of (yes) is ({post/published}))) is (yes))
+	(if any of ((if value of ({/data/old-entry/@id}) is ()), (if value of (yes) is ({/data/post/published}))) is (yes))
 
 
 ## Examples of filtering a data source

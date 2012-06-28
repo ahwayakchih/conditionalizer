@@ -3,8 +3,8 @@
 	
 		public function about() {
 			return array('name' => __('Conditionalizer'),
-						 'version' => '1.2',
-						 'release-date' => '2012-06-27',
+						 'version' => '1.2.1',
+						 'release-date' => '2012-06-28',
 						 'author' => array('name' => 'Marcin Konicki',
 										   'website' => 'http://ahwayakchih.neoni.net',
 										   'email' => 'ahwayakchih@neoni.net'),
