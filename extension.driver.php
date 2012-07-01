@@ -122,8 +122,10 @@
 			}
 
 			$fieldset = new XMLElement('fieldset');
-			$fieldset->setAttribute('class', 'settings');
+			$fieldset->setAttribute('class', 'settings conditionalizer');
 			$fieldset->appendChild(new XMLElement('legend', __('Conditionalizer')));
+
+			$fieldset->appendChild(new XMLElement('script', NULL, array('src' => URL . '/extensions/conditionalizer/assets/conditionalizer.js', 'type' => 'text/javascript')));
 
 			$label = Widget::Label(__('Expression'));
 			$label->appendChild(Widget::Textarea('conditionalizer', 6, 50, General::sanitize(stripslashes($data)), array('class' => 'code')));
@@ -146,6 +148,22 @@
 
 			if (empty($e) && !empty($data)) $fieldset->appendChild(Widget::Error($label, __('Invalid syntax')));
 			else $fieldset->appendChild($label);
+
+			// Add list of parameters that may be available.
+			$params = Conditionalizer::listParams();
+			if (!empty($params)) {
+				$optionlist = new XMLElement('ul');
+				$optionlist->setAttribute('class', 'tags');
+
+				$optionlist->appendChild(new XMLElement('li', 'yes', array('title' => 'Exact string value')));
+				$optionlist->appendChild(new XMLElement('li', 'no', array('title' => 'Exact string value')));
+
+				foreach ($params as $param => $value) {
+					$optionlist->appendChild(new XMLElement('li', $param, array('class' => '{'.$param.'}', 'title' => ($value ? __('Value of %s returned from another data source', array($value)) : __('Value found in URL path')))));
+				}
+
+				$fieldset->appendChild($optionlist);
+			}
 
 			$nodes = $context['oPage']->Form->getChildren();
 			for ($i = count($nodes) - 1; $i >= 0; $i--) {

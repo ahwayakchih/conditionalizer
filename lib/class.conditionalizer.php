@@ -117,4 +117,51 @@ class Conditionalizer {
 
 			return true;
 		}
+
+
+		// Get list of page and datasource params
+		// WARNING: this can be run only in Symphony's environment, because it depends on Database and DatasourceManager!
+		public static function listParams() {
+			$params = array();
+
+			// It's no fun without Symphony
+			if (!defined('TOOLKIT') || !class_exists('Symphony') || !Symphony::Database()) return $params;
+
+			// Get page params
+			$pages = Symphony::Database()->fetch('SELECT params FROM tbl_pages WHERE params IS NOT NULL');
+			if (is_array($pages) && !empty($pages)) {
+				foreach ($pages as $page => $data) {
+					if (($data = trim($data['params']))) {
+						foreach (explode('/', $data) as $p) {
+							$params['$'.$p] = '';
+						}
+					}
+				}
+			}
+
+			// Get datasource generated params
+			if (!class_exists('DatasourceManager')) {
+				require_once(TOOLKIT . '/class.datasourcemanager.php');
+			}
+			foreach (DatasourceManager::listAll() as $name => $info) {
+				$ds = DatasourceManager::create($name);
+				// Support Symphony's section fields
+				if (isset($ds->dsParamPARAMOUTPUT) && !empty($ds->dsParamPARAMOUTPUT)) {
+					if (!is_array($ds->dsParamPARAMOUTPUT)) $params['$ds-'.$ds->dsParamROOTELEMENT] = $ds->dsParamPARAMOUTPUT;
+					else {
+						foreach ($ds->dsParamPARAMOUTPUT as $field) {
+							$params['$ds-'.$ds->dsParamROOTELEMENT.'.'.$field] = $field;
+						}
+					}
+				}
+				// Support Parametrisator's xpaths
+				if (isset($ds->dsParamParametrisator) && is_array($ds->dsParamParametrisator) && isset($ds->dsParamParametrisator['xpaths'])) {
+					foreach ($ds->dsParamParametrisator['xpaths'] as $name => $xpath) {
+						$params['$ds-'.$ds->dsParamROOTELEMENT.'-'.$name] = $name;
+					}
+				}
+			}
+
+			return $params;
+		}
 }

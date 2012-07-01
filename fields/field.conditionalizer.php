@@ -207,7 +207,7 @@
 			$label->appendChild(Widget::Input('fields[filter]'.($fieldnamePrefix ? '['.$fieldnamePrefix.']' : '').'['.$this->get('id').']'.($fieldnamePostfix ? '['.$fieldnamePostfix.']' : ''), ($data ? General::sanitize($data) : null)));
 			$wrapper->appendChild((empty($e) ? Widget::wrapFormElementWithError($label, __('Invalid syntax')) : $label));
 
-			$params = $this->listParams();
+			$params = Conditionalizer::listParams();
 			if (empty($params)) return;
 
 			$optionlist = new XMLElement('ul');
@@ -288,41 +288,6 @@
 	/*-------------------------------------------------------------------------
 		Utilities:
 	-------------------------------------------------------------------------*/
-
-		// Get list of page and datasource params
-		private function listParams() {
-			$params = array();
-
-			// Get page params
-			$pages = Symphony::Database()->fetch('SELECT params FROM tbl_pages WHERE params IS NOT NULL');
-			if (is_array($pages) && !empty($pages)) {
-				foreach ($pages as $page => $data) {
-					if (($data = trim($data['params']))) {
-						foreach (explode('/', $data) as $p) {
-							$params['$'.$p] = '';
-						}
-					}
-				}
-			}
-
-			// Get datasource generated params
-			$files = General::listStructure(DATASOURCES, array('php'), false, 'asc');
-			if (!empty($files['filelist'])) {
-				foreach ($files['filelist'] as $file) {
-					$data = file_get_contents($file);
-					if (strpos($data, 'include(TOOLKIT . \'/data-sources/datasource.section.php\');') === false) continue;
-
-					if (preg_match('/\s+public\s*\$dsParamPARAMOUTPUT\s*=\s*([\'"])([^\1]+)(?:\1)\s*;/U', $data, $m)) {
-						$p = $m[2];
-						if (preg_match('/\s+public\s*\$dsParamROOTELEMENT\s*=\s*([\'"])([^\1]+)(?:\1)\s*;/U', $data, $m)) {
-							$params['$ds-'.$m[2]] = $p;
-						}
-					}
-				}
-			}
-
-			return $params;
-		}
 
 		// From Reflection field extension:
 		// http://symphony-cms.com/download/extensions/view/20737/
