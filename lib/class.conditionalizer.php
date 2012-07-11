@@ -144,7 +144,7 @@ class Conditionalizer {
 				require_once(TOOLKIT . '/class.datasourcemanager.php');
 			}
 			foreach (DatasourceManager::listAll() as $name => $info) {
-				$ds = DatasourceManager::create($name);
+				$ds = DatasourceManager::create($name, NULL, false);
 				// Support Symphony's section fields
 				if (isset($ds->dsParamPARAMOUTPUT) && !empty($ds->dsParamPARAMOUTPUT)) {
 					if (!is_array($ds->dsParamPARAMOUTPUT)) $params['$ds-'.$ds->dsParamROOTELEMENT] = $ds->dsParamPARAMOUTPUT;
