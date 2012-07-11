@@ -1,8 +1,8 @@
 # Conditionalizer
 
-- Version: 1.2.1
+- Version: 1.2.2
 - Author: Marcin Konicki (http://ahwayakchih.neoni.net)
-- Build Date: 28 June 2012
+- Build Date: 11 July 2012
 - Requirements: Symphony version 2.3 or later.
 
 
@@ -36,6 +36,7 @@ Conditionalizer field can also be used to minimize number of SQL queries, becaus
 
 ## Changelog
 
+- **1.2.2** Fixed crash error reported by bzerangue.
 - **1.2.1** Fixed handling of whitespace inside values used in expression. Expression input fields are now textareas. Shows nice error box after conditions were not met for saving an entry.
 - **1.2** Update for Symphony 2.3. This drops compatibility with Symphony 2.2. Changed name from `filterfield` to `conditionalizer`. Fields are not required to set conditions for data-source. Conditions can be set for any type of data-source, e.g., Dynamic XML.
 - **1.1** Allow using an expression to prevent an entry from being saved. Value filtering expressions can now use {XPath}. Filter field will now store `yes` or `no` (when field expression evaluates to `false`) value in database.
