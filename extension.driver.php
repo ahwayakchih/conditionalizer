@@ -37,7 +37,7 @@
 			$result = Symphony::Database()->query("CREATE TABLE IF NOT EXISTS `tbl_fields_conditionalizer` (
 				`id` int(11) unsigned NOT NULL auto_increment,
 				`field_id` int(11) unsigned NOT NULL,
-				`expression` TEXT default '',
+				`expression` TEXT,
 				`show_errors` enum('yes','no') NOT NULL default 'no',
 				PRIMARY KEY  (`id`),
 				UNIQUE KEY `field_id` (`field_id`)
