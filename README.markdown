@@ -1,8 +1,8 @@
 # Conditionalizer
 
-- Version: 1.2.2
+- Version: 1.3
 - Author: Marcin Konicki (http://ahwayakchih.neoni.net)
-- Build Date: 11 July 2012
+- Build Date: 24 August 2013
 - Requirements: Symphony version 2.3 or later.
 
 
