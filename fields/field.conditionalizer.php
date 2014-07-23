@@ -73,7 +73,7 @@
 			$label->appendChild(new XMLElement('i', __('Optional')));
 			$input = Widget::Textarea('fields['.$this->get('sortorder').'][expression]', 6, 50, General::sanitize(stripslashes($this->get('expression'))), array('class' => 'code'));
 			$label->appendChild($input);
-			if (isset($errors['expression'])) $wrapper->appendChild(Widget::wrapFormElementWithError($label, $errors['expression']));
+			if (isset($errors['expression'])) $wrapper->appendChild(Widget::Error($label, $errors['expression']));
 			else $wrapper->appendChild($label);
 			$wrapper->appendChild(new XMLElement('p', __('Default value of this field will be set to <code>yes</code>. If expression above will evaluate to <code>false</code>, value of this field will be set to <code>no</code>. Use <code>{XPath}</code> syntax to put values into expression before it will be evaluated, e.g., to make use of a value posted from HTML element called "<code>fields[published]</code>" enter "<code>{/data/post/published}</code>".'), array('class' => 'help')));
 
@@ -119,7 +119,7 @@
 			if ($flagWithError == NULL) return;
 
 			$label = Widget::Label($this->get('label'));
-			$wrapper->appendChild(Widget::wrapFormElementWithError($label, $flagWithError));
+			$wrapper->appendChild(Widget::Error($label, $flagWithError));
 		}
 
 		public function checkPostFieldData($data, &$message, $entry_id = NULL) {
@@ -205,7 +205,7 @@
 			)));
 			$label = Widget::Label(__('Value'));
 			$label->appendChild(Widget::Input('fields[filter]'.($fieldnamePrefix ? '['.$fieldnamePrefix.']' : '').'['.$this->get('id').']'.($fieldnamePostfix ? '['.$fieldnamePostfix.']' : ''), ($data ? General::sanitize($data) : null)));
-			$wrapper->appendChild((empty($e) ? Widget::wrapFormElementWithError($label, __('Invalid syntax')) : $label));
+			$wrapper->appendChild((empty($e) ? Widget::Error($label, __('Invalid syntax')) : $label));
 
 			$params = Conditionalizer::listParams();
 			if (empty($params)) return;
