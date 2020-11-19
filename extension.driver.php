@@ -16,7 +16,7 @@
 			return Symphony::Database()->query("DROP TABLE `tbl_fields_conditionalizer`");
 		}
 		
-		public function update($previousVersion) {
+		public function update($previousVersion = false) {
 			return true;
 		}
 
