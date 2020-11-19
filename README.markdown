@@ -1,9 +1,9 @@
 # Conditionalizer
 
-- Version: 1.3
+- Version: 1.4
 - Author: Marcin Konicki (http://ahwayakchih.neoni.net)
-- Build Date: 24 August 2013
-- Requirements: Symphony version 2.3 or later.
+- Build Date: 19 November 2020
+- Requirements: Symphony version 2.7 or later.
 
 
 ## Overview
@@ -36,6 +36,7 @@ Conditionalizer field can also be used to minimize number of SQL queries, becaus
 
 ## Changelog
 
+- **1.4** Update for Symphony 2.7 and PHP 7.4 (thanks to animaux for that :).
 - **1.3** Added "matches" and "matches not" operands (thanks to bzerangue for asking about validating for numeric values :).
 - **1.2.2** Fixed crash error reported by bzerangue.
 - **1.2.1** Fixed handling of whitespace inside values used in expression. Expression input fields are now textareas. Shows nice error box after conditions were not met for saving an entry.
